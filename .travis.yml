@@ -17,7 +17,7 @@ sudo: false
 
 notifications:
   email:
-    - n.widart@gmail.com
+    - darron1217@gmail.com
 
 matrix:
   allow_failures:

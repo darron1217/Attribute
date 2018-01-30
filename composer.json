@@ -1,5 +1,5 @@
 {
-	"name": "asgardcms/attribute-module",
+	"name": "laraplug/attribute-module",
 	"description": "",
     "type": "asgard-module",
     "license": "MIT",
