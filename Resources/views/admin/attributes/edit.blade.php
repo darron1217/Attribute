@@ -88,7 +88,7 @@
 
                         </div>
                         <div class="col-md-6" style="margin-top: 25px">
-                            @include('attribute::admin.attributes.partials.options_create')
+                            @include('attribute::admin.attributes.partials.option-fields')
                         </div>
                     </div>
                 </div>

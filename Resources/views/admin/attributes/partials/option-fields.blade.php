@@ -1,11 +1,20 @@
-<?php $oldOptions = old('options') !== null ? OptionsNormaliser::normalise(old('options')) : null ?>
+@php
+    $options = old('options') ? OptionsNormaliser::normalise(old('options')) : null;
+    // If attribute exists
+    if(!$options && isset($attribute)) {
+        $options = $attribute->options()->get()->mapWithKeys(function($option) {
+            return [$option->key => $option->getTranslationsArray()];
+        });
+    }
+@endphp
+
 
 <div class="jumbotron noOptionsArea"
-     style="{{ (isset($attribute) && $attribute->useOptions() === false) && $oldOptions === null ? '' : 'display: none;'}}">
+     style="{{ (isset($attribute) && $attribute->useOptions() === false) && $options === null ? '' : 'display: none;'}}">
     <h4 class="text-center">{{ trans('attribute::attributes.no options') }}</h4>
 </div>
 
-<div class="form-group optionsArea" style="{{ (isset($attribute) && $attribute->useOptions() === true) || $oldOptions !== null ? '' : 'display: none;'}}">
+<div class="form-group optionsArea" style="{{ (isset($attribute) && $attribute->useOptions() === true) || $options !== null ? '' : 'display: none;'}}">
     <div class="dd">
         <ol class="options list-group dd-list jsOptionsWrapper" data-item-count="0">
             <li class="dd-item hidden jsItemTemplate">
@@ -32,7 +41,15 @@
                     </div>
                 </div>
             </li>
-            @include('attribute::admin.attributes.partials.old_options')
+            @php
+                $count = 1;
+            @endphp
+            @foreach ($options as $value => $option)
+                @php
+                    $count++;
+                @endphp
+                @include('attribute::admin.attributes.partials.option-item', ['count' => $count])
+            @endforeach
         </ol>
     </div>
 </div>

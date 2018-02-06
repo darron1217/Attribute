@@ -9,7 +9,7 @@
             <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
             <div class="lang-group {{ $locale }}" style="{{ $locale !== locale() ? 'display: none;' : ''}}">
                 <input class="form-control" id="label" name="options[{{$count}}][{{$locale}}][label]"
-                       type="text" value="{{ $option->getLabel($locale) }}" placeholder="{{ trans('attribute::attributes.option label') }}">
+                       type="text" value="{{ $option[$locale]['label'] }}" placeholder="{{ trans('attribute::attributes.option label') }}">
             </div>
             <?php endforeach; ?>
             <select name="" class="form-control jsOptionLanguage">

@@ -12,7 +12,7 @@ class EloquentAttributeRepository extends EloquentBaseRepository implements Attr
     {
         $data['slug'] = str_slug($data['slug']);
 
-        $data['options'] = OptionsNormaliser::normalise(array_get($data, 'options'));
+        if(isset($data['options'])) $data['options'] = OptionsNormaliser::normalise(array_get($data, 'options'));
 
         $attribute = $this->model->create($data);
 
@@ -23,9 +23,9 @@ class EloquentAttributeRepository extends EloquentBaseRepository implements Attr
 
     public function update($attribute, $data)
     {
-        $data['slug'] = str_slug($data['slug']);
+        if(isset($data['slug'])) $data['slug'] = str_slug($data['slug']);
 
-        $data['options'] = OptionsNormaliser::normalise(array_get($data, 'options'));
+        if(isset($data['options'])) $data['options'] = OptionsNormaliser::normalise(array_get($data, 'options'));
 
         $attribute->update($data);
 
